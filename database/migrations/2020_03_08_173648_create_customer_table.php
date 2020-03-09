@@ -18,7 +18,7 @@ class CreateCustomerTable extends Migration
             $table->string('name');
         });
 
-        DB::Statement('insert into customer values (default,"John"),(default,"Alex"),(default,"William")');
+        DB::Statement('insert into customer values (default,"Petronas"),(default,"Huawei"),(default,"Axiata")');
     }
 
     /**
