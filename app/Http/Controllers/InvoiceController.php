@@ -27,7 +27,6 @@ class InvoiceController extends Controller
             );
             return response()->json($message, 404);
         }
-
         return response()->json($invoice, 200);
     }
 
