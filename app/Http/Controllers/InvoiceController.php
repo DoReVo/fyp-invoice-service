@@ -17,7 +17,7 @@ class InvoiceController extends Controller
         //
     }
 
-    public function getOne($id)
+    public function getOne($id, Request $request)
     {
         try {
             $invoice = Invoice::findOrFail($id);
