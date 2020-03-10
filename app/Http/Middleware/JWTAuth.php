@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\JWTHelper;
 use Closure;
-use App\Invoice;
+
+// use Illuminate\Http\Request;
 
 class JWTAuth
 {
@@ -16,15 +18,39 @@ class JWTAuth
      */
     public function handle($request, Closure $next)
     {
-        $route = $request->route();
-        $invoice_id = $route[2]['id'];
-        try {
-            $invoice = Invoice::findOrFail($invoice_id);
-        } catch (\Throwable $th) {
-            return response()->json($th->getMessage(), 400);
+
+        // New JWTHelper instance
+        $jwtHandler = new JWTHelper;
+
+        // Get JWT Token
+        $token = $request->bearerToken();
+
+        // If token does not exist
+        if (!$token) {
+            // Respond with unauthorized request
+            return response(array('error' => 'You are not authenticated'), 403);
+            // return $request->header();
         }
-        $request
+
+        $decodedToken = $jwtHandler->decode($token);
+
         return $next($request);
+
+        // try {
+
+        //     // Decode JWT token
+        //     $decodedToken = $jwtHandler->decode($token);
+
+        // } catch (\Exception $e) {
+        //     return response(
+        //         json_encode(
+        //             array(
+        //                 'message' => $e->getMessage(),
+        //             )
+        //         ),
+        //         403
+        //     );
+        // }
 
         // return $invoice;
     }
