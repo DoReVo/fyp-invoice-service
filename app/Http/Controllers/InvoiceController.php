@@ -17,26 +17,28 @@ class InvoiceController extends Controller
         //
     }
 
-    public function getOne($id, Request $request)
+    public function getOne($id)
     {
         try {
             $invoice = Invoice::findOrFail($id);
         } catch (\Throwable $th) {
             $message = array(
-                'message' => 'Invoice not found',
+                'error' => 'Invoice not found',
             );
             return response()->json($message, 404);
         }
         return response()->json($invoice, 200);
     }
 
+    // params body required :
+    // payment_id
     public function markPaid($id, Request $request)
     {
         try {
             $invoice = Invoice::findOrFail($id);
         } catch (\Throwable $th) {
             $message = array(
-                'message' => 'Invoice not found',
+                'error' => 'Invoice not found',
             );
             return response()->json($message, 404);
         }
