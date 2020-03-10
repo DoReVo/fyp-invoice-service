@@ -22,36 +22,22 @@ class JWTAuth
         // New JWTHelper instance
         $jwtHandler = new JWTHelper;
 
-        // Get JWT Token
+        // Get JWT Token from Authorization header
         $token = $request->bearerToken();
 
-        // If token does not exist
-        if (!$token) {
-            // Respond with unauthorized request
-            return response(array('error' => 'You are not authenticated'), 403);
-            // return $request->header();
+        try {
+            // if token does not exist
+            if (!$token) {
+                throw new \Exception("No access token provided");
+            }
+            // tries to decode token if it exist,
+            // will throw error if failed
+            $decodedToken = $jwtHandler->decode($token);
+        } catch (\Throwable $th) {
+            return response(array('error' => $th->getMessage()), 403);
         }
-
-        $decodedToken = $jwtHandler->decode($token);
 
         return $next($request);
 
-        // try {
-
-        //     // Decode JWT token
-        //     $decodedToken = $jwtHandler->decode($token);
-
-        // } catch (\Exception $e) {
-        //     return response(
-        //         json_encode(
-        //             array(
-        //                 'message' => $e->getMessage(),
-        //             )
-        //         ),
-        //         403
-        //     );
-        // }
-
-        // return $invoice;
     }
 }
