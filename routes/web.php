@@ -12,7 +12,7 @@
  */
 
 // get one invoice
-$router->get('/invoice/{id}', ['uses' => 'InvoiceController@getOne']);
+$router->get('/invoice/{id}', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@getOne']);
 
 // mark invoice as paid
-$router->patch('/invoice/{id}/pay', ['uses' => 'InvoiceController@markPaid']);
+$router->patch('/invoice/{id}/pay', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@markPaid']);
