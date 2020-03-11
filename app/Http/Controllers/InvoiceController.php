@@ -30,26 +30,8 @@ class InvoiceController extends Controller
         return response()->json($invoice, 200);
     }
 
-    // params body required :
-    // payment_id
     public function markPaid($id, Request $request)
     {
-        try {
-            $invoice = Invoice::findOrFail($id);
-        } catch (\Throwable $th) {
-            $message = array(
-                'error' => 'Invoice not found',
-            );
-            return response()->json($message, 404);
-        }
-
-        // set isPaid to true
-        $invoice->isPaid = 1;
-        // set payment_id
-        $invoice->payment_id = $request->payment_id;
-
-        $invoice->save();
-
-        return response()->json($invoice, 200);
+        return response()->json(array('message' => 'Ok from invoice service'), 200);
     }
 }
