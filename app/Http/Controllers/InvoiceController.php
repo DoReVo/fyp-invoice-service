@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
-use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
@@ -30,7 +29,7 @@ class InvoiceController extends Controller
         return response()->json($invoice, 200);
     }
 
-    public function markPaid($id, Request $request)
+    public function handleRequest()
     {
         return response()->json(array('message' => 'Ok from invoice service'), 200);
     }

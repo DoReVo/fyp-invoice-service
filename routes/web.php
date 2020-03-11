@@ -15,4 +15,6 @@
 $router->get('/invoice/{id}', ['middleware' => 'JWTAuth', 'uses' => 'InvoiceController@getOne']);
 
 // mark invoice as paid
-$router->patch('/invoice/{id}/pay', ['middleware' => 'JWTAuth', 'uses' => 'InvoiceController@markPaid']);
+// $router->patch('/invoice/{id}/pay', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@markPaid']);
+
+$router->get('/', ['middleware' => 'JWTAuth', 'uses' => 'InvoiceController@handleRequest']);
