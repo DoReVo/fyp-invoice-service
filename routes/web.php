@@ -15,4 +15,6 @@
 $router->get('/invoice/{id}', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@getOne']);
 
 // mark invoice as paid
-$router->patch('/invoice/{id}/pay', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@markPaid']);
+// $router->patch('/invoice/{id}/pay', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@markPaid']);
+
+$router->get('/', ['middleware' => 'SessionAuth', 'uses' => 'InvoiceController@handleRequest']);
